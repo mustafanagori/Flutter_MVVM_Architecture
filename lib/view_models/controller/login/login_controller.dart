@@ -39,10 +39,13 @@ class LoginViewModel extends GetxController {
         userPrefrence
             .saveUser(userModel)
             .then((value) => {
-                  Get.to(RouteName.homeScreen),
+                  // for deelte the data from RAM after login
+                  Get.delete<LoginViewModel>(),
+
+                  Get.toNamed(RouteName.homeScreen)!.then((value) => {}),
+                  Utlis.snackBar("Login", "login sucessfully"),
                 })
             .onError((error, stackTrace) => {});
-        Utlis.snackBar("Login", "login sucessfully");
       }
     }).onError((error, stackTrace) {
       loading.value = false;
